@@ -10,11 +10,25 @@ import MapKit
 
 class MapViewController: UIViewController {
 
+    @IBOutlet weak var mapView: MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        mapView.delegate = self
     }
+    
+    @IBAction func dropNewPin(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            let touchLocation = gestureRecognizer.location(in: mapView)
+            let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = locationCoordinate
+            mapView.addAnnotation(annotation)
+        }
+    }
+}
 
-
+extension MapViewController: MKMapViewDelegate {
+    
 }
 
