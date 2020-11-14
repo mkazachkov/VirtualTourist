@@ -66,22 +66,36 @@
                                 </constraints>
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7mH-u2-lkD">
-                                <rect key="frame" x="0.0" y="295" width="414" height="567"/>
+                                <rect key="frame" x="0.0" y="295" width="414" height="517"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vlD-EJ-a7k">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vlD-EJ-a7k">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gnc-br-Fvl">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="PhotoCell" id="gnc-br-Fvl" customClass="PhotoCell" customModule="VirtualTourist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="f6A-Cr-aRc">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="f6A-Cr-aRc" customClass="PhotoCell" customModule="VirtualTourist" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="exr-Ro-mvd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="exr-Ro-mvd" firstAttribute="top" secondItem="f6A-Cr-aRc" secondAttribute="top" id="7mu-ys-3rn"/>
+                                                <constraint firstAttribute="bottom" secondItem="exr-Ro-mvd" secondAttribute="bottom" id="9oG-qt-D4g"/>
+                                                <constraint firstItem="exr-Ro-mvd" firstAttribute="leading" secondItem="f6A-Cr-aRc" secondAttribute="leading" id="Zie-zj-gLf"/>
+                                                <constraint firstAttribute="trailing" secondItem="exr-Ro-mvd" secondAttribute="trailing" id="a9L-qz-Fhg"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="exr-Ro-mvd" id="CZF-gM-OPW"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -105,7 +119,7 @@
                             <constraint firstItem="7mH-u2-lkD" firstAttribute="top" secondItem="hyl-Hg-IJf" secondAttribute="bottom" id="amb-Y6-MgI"/>
                             <constraint firstItem="H9A-mK-vF5" firstAttribute="trailing" secondItem="LTZ-ue-ra5" secondAttribute="trailing" id="c1H-6l-zt0"/>
                             <constraint firstItem="7mH-u2-lkD" firstAttribute="leading" secondItem="LTZ-ue-ra5" secondAttribute="leading" id="cYN-YN-mae"/>
-                            <constraint firstItem="LTZ-ue-ra5" firstAttribute="bottom" secondItem="7mH-u2-lkD" secondAttribute="bottom" id="gTg-VN-wYe"/>
+                            <constraint firstItem="H9A-mK-vF5" firstAttribute="top" secondItem="7mH-u2-lkD" secondAttribute="bottom" id="gTg-VN-wYe"/>
                             <constraint firstItem="H9A-mK-vF5" firstAttribute="leading" secondItem="LTZ-ue-ra5" secondAttribute="leading" id="icB-8k-Y8J"/>
                             <constraint firstItem="LTZ-ue-ra5" firstAttribute="trailing" secondItem="hyl-Hg-IJf" secondAttribute="trailing" id="t29-kV-mUi"/>
                             <constraint firstItem="LTZ-ue-ra5" firstAttribute="trailing" secondItem="7mH-u2-lkD" secondAttribute="trailing" id="y2C-RH-Luj"/>
