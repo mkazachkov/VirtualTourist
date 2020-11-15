@@ -30,7 +30,6 @@ class AlbumViewController: UIViewController {
         mapView.setRegion(region, animated: true)
         
         collectionView.dataSource = self
-        collectionView.delegate = self
         
         FlickrClient.searchPhotos(pinLocation: pinLocation) { (photos, error) in
             print(photos)
@@ -58,10 +57,4 @@ extension AlbumViewController: UICollectionViewDataSource {
         
         return cell
     }
-}
-
-extension AlbumViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        le
-//    }
 }

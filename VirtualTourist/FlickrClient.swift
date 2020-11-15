@@ -20,7 +20,7 @@ class FlickrClient {
         var urlString: String {
             switch self {
             case .searchPhotos(let pinLocation):
-                return Endpoints.baseUrl + "?method=flickr.photos.search&api_key=\(FlickrClient.apiKey)&lat=\(pinLocation.latitude)&lon=\(pinLocation.longitude)&radius=0.1&format=json&nojsoncallback=1"
+                return Endpoints.baseUrl + "?method=flickr.photos.search&api_key=\(FlickrClient.apiKey)&lat=\(pinLocation.latitude)&lon=\(pinLocation.longitude)&radius=0.1&sort=date-posted-desc&per_page=100&page=1&format=json&nojsoncallback=1"
             case .getImage(let id, let server, let secret):
                 return "https://live.staticflickr.com/\(server)/\(id)_\(secret)_w.jpg"
             }
