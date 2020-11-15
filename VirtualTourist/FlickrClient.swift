@@ -58,8 +58,11 @@ class FlickrClient {
     
     class func searchPhotos(pinLocation: PinLocation, completion: @escaping ([Photo], Error?) -> Void) {
         taskForGETRequest(url: Endpoints.searchPhotos(pinLocation).url, responseType: SearchPhotosResponse.self) { (response, error) in
-            print(response ?? "")
-            completion(response!.photos.photo, nil)
+            guard let response = response else {
+                completion([], error)
+                return
+            }
+            completion(response.photos.photo, nil)
         }
     }
     

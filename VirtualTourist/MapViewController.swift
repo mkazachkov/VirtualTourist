@@ -15,6 +15,19 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        
+        if UserDefaults.standard.bool(forKey: "hasLaunchedBefore") {
+            let latitude = UserDefaults.standard.double(forKey: "latitude")
+            let longitude = UserDefaults.standard.double(forKey: "longitude")
+            let latitudeDelta = UserDefaults.standard.double(forKey: "latitudeDelta")
+            let longitudeDelta = UserDefaults.standard.double(forKey: "longitudeDelta")
+            
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta))
+            mapView.setRegion(region, animated: true)
+        } else {
+            saveRegion(mapView)
+            UserDefaults.standard.setValue(true, forKey: "hasLaunchedBefore")
+        }
     }
     
     @IBAction func dropNewPin(_ gestureRecognizer: UILongPressGestureRecognizer) {
@@ -25,6 +38,13 @@ class MapViewController: UIViewController {
             annotation.coordinate = locationCoordinate
             mapView.addAnnotation(annotation)
         }
+    }
+    
+    func saveRegion(_ mapView: MKMapView) {
+        UserDefaults.standard.setValue(mapView.region.center.latitude, forKey: "latitude")
+        UserDefaults.standard.setValue(mapView.region.center.longitude, forKey: "longitude")
+        UserDefaults.standard.setValue(mapView.region.span.latitudeDelta, forKey: "latitudeDelta")
+        UserDefaults.standard.setValue(mapView.region.span.longitudeDelta, forKey: "longitudeDelta")
     }
     
 
@@ -40,6 +60,10 @@ class MapViewController: UIViewController {
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         self.performSegue(withIdentifier: "showAlbum", sender: nil)
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        saveRegion(mapView)
     }
 }
 

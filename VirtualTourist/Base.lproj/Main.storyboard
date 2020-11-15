@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mIv-uV-FW9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mIv-uV-FW9">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -74,6 +74,10 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" id="bOn-rZ-RTI">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="517"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="PhotoCell" id="gnc-br-Fvl" customClass="PhotoCell" customModule="VirtualTourist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -82,7 +86,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="exr-Ro-mvd">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VirtualTourist_120" translatesAutoresizingMaskIntoConstraints="NO" id="exr-Ro-mvd">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 </imageView>
                                             </subviews>
@@ -99,6 +103,13 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yXI-ez-5Xa">
+                                <rect key="frame" x="0.0" y="295" width="414" height="517"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H9A-mK-vF5">
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <constraints>
@@ -106,7 +117,11 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="uyA-es-9rg"/>
-                                    <barButtonItem title="New Collection" id="E5X-LM-GTS"/>
+                                    <barButtonItem title="New Collection" id="E5X-LM-GTS">
+                                        <connections>
+                                            <action selector="newCollectionTapped:" destination="eJY-Ej-bar" id="BEt-qd-MRq"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="u1E-dj-8Uo"/>
                                 </items>
                             </toolbar>
@@ -128,13 +143,16 @@
                     </view>
                     <navigationItem key="navigationItem" id="IFN-i0-MB9"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="bOn-rZ-RTI" id="sjK-w8-h1T"/>
                         <outlet property="collectionView" destination="7mH-u2-lkD" id="NJW-BE-EDr"/>
                         <outlet property="mapView" destination="hyl-Hg-IJf" id="lu6-47-qZf"/>
+                        <outlet property="newCollectionButton" destination="E5X-LM-GTS" id="bhr-2p-c4E"/>
+                        <outlet property="noImagesLabel" destination="yXI-ez-5Xa" id="ZWQ-Hu-wb7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EJw-iy-VT5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="555" y="88"/>
+            <point key="canvasLocation" x="553.62318840579712" y="87.723214285714278"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SqS-p9-F6A">
@@ -154,6 +172,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="VirtualTourist_120" width="120" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
