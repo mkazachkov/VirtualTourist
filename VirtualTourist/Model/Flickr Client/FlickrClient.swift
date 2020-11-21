@@ -14,13 +14,13 @@ class FlickrClient {
     enum Endpoints {
         static let baseUrl = "https://www.flickr.com/services/rest/"
         
-        case searchPhotos(PinLocation)
+        case searchPhotos(Pin)
         case getImage(String, String, String)
         
         var urlString: String {
             switch self {
-            case .searchPhotos(let pinLocation):
-                return Endpoints.baseUrl + "?method=flickr.photos.search&api_key=\(FlickrClient.apiKey)&lat=\(pinLocation.latitude)&lon=\(pinLocation.longitude)&radius=0.1&sort=date-posted-desc&per_page=100&page=1&format=json&nojsoncallback=1"
+            case .searchPhotos(let pin):
+                return Endpoints.baseUrl + "?method=flickr.photos.search&api_key=\(FlickrClient.apiKey)&lat=\(pin.latitude)&lon=\(pin.longitude)&radius=0.1&sort=date-posted-desc&per_page=100&page=1&format=json&nojsoncallback=1"
             case .getImage(let id, let server, let secret):
                 return "https://live.staticflickr.com/\(server)/\(id)_\(secret)_w.jpg"
             }
@@ -56,8 +56,8 @@ class FlickrClient {
         return task
     }
     
-    class func searchPhotos(pinLocation: PinLocation, completion: @escaping ([Photo], Error?) -> Void) {
-        taskForGETRequest(url: Endpoints.searchPhotos(pinLocation).url, responseType: SearchPhotosResponse.self) { (response, error) in
+    class func searchPhotos(pin: Pin, completion: @escaping ([FlickrPhoto], Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.searchPhotos(pin).url, responseType: SearchPhotosResponse.self) { (response, error) in
             guard let response = response else {
                 completion([], error)
                 return
@@ -66,7 +66,7 @@ class FlickrClient {
         }
     }
     
-    class func getImage(id: String, serverId: String, secret: String, completion: @escaping (UIImage?, Error?) -> Void) {
+    class func getImage(id: String, serverId: String, secret: String, completion: @escaping (Data?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: Endpoints.getImage(id, serverId, secret).url) { (data, response, error) in
             guard let data = data else {
                 DispatchQueue.main.async {
@@ -76,7 +76,7 @@ class FlickrClient {
             }
             
             DispatchQueue.main.async {
-                completion(UIImage(data: data), nil)
+                completion(data, nil)
             }
         }
         task.resume()

@@ -1,5 +1,5 @@
 //
-//  PhotoCellCollectionViewCell.swift
+//  PhotoCell.swift
 //  VirtualTourist
 //
 //  Created by Mikhail on 11/14/20.

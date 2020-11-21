@@ -1,5 +1,5 @@
 //
-//  Photos.swift
+//  FlickrPhotos.swift
 //  VirtualTourist
 //
 //  Created by Mikhail on 11/14/20.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-class Photos: Codable {
-    let photo: [Photo]
+class FlickrPhotos: Codable {
+    let photo: [FlickrPhoto]
 }

@@ -8,6 +8,6 @@
 import Foundation
 
 struct SearchPhotosResponse: Codable {
-    let photos: Photos
+    let photos: FlickrPhotos
     let stat: String
 }
