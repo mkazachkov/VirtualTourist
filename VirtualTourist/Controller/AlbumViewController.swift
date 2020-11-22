@@ -55,7 +55,7 @@ class AlbumViewController: UIViewController {
     
     func createNewCollection() {
         setLoading(true)
-        FlickrClient.searchPhotos(pin: pin, completion: handleSearchPhotos(flickrPhotos:error:))
+        FlickrClient.searchRandomPhotos(pin: pin, completion: handleSearchPhotos(flickrPhotos:error:))
     }
     
     fileprivate func addPhotoFrom(_ flickrPhoto: FlickrPhoto) {

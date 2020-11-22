@@ -8,5 +8,6 @@
 import Foundation
 
 class FlickrPhotos: Codable {
+    let pages: Int
     let photo: [FlickrPhoto]
 }

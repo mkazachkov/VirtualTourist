@@ -14,13 +14,13 @@ class FlickrClient {
     enum Endpoints {
         static let baseUrl = "https://www.flickr.com/services/rest/"
         
-        case searchPhotos(Pin)
+        case searchPhotos(Pin, Int)
         case getImage(String, String, String)
         
         var urlString: String {
             switch self {
-            case .searchPhotos(let pin):
-                return Endpoints.baseUrl + "?method=flickr.photos.search&api_key=\(FlickrClient.apiKey)&lat=\(pin.latitude)&lon=\(pin.longitude)&radius=0.1&sort=date-posted-desc&per_page=100&page=1&format=json&nojsoncallback=1"
+            case .searchPhotos(let pin, let page):
+                return Endpoints.baseUrl + "?method=flickr.photos.search&api_key=\(FlickrClient.apiKey)&lat=\(pin.latitude)&lon=\(pin.longitude)&radius=0.1&per_page=100&page=\(page)&format=json&nojsoncallback=1"
             case .getImage(let id, let server, let secret):
                 return "https://live.staticflickr.com/\(server)/\(id)_\(secret)_w.jpg"
             }
@@ -56,13 +56,39 @@ class FlickrClient {
         return task
     }
     
-    class func searchPhotos(pin: Pin, completion: @escaping ([FlickrPhoto], Error?) -> Void) {
-        taskForGETRequest(url: Endpoints.searchPhotos(pin).url, responseType: SearchPhotosResponse.self) { (response, error) in
+    class func searchRandomPhotos(pin: Pin, completion: @escaping ([FlickrPhoto], Error?) -> Void) {
+        getPhotosCount(pin: pin) { (count, error) in
+            guard let count = count else {
+                completion([], error)
+                return
+            }
+            print("count: \(count)")
+            guard count > 0 else {
+                completion([], nil)
+                return
+            }
+            searchPhotosOnPage(pin: pin, page: Int.random(in: 1...count), completion: completion)
+        }
+    }
+    
+    class func searchPhotosOnPage(pin: Pin, page: Int, completion: @escaping ([FlickrPhoto], Error?) -> Void) {
+        print("page: \(page)")
+        taskForGETRequest(url: Endpoints.searchPhotos(pin, page).url, responseType: SearchPhotosResponse.self) { (response, error) in
             guard let response = response else {
                 completion([], error)
                 return
             }
             completion(response.photos.photo, nil)
+        }
+    }
+    
+    class func getPhotosCount(pin: Pin, completion: @escaping (Int?, Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.searchPhotos(pin, 1).url, responseType: SearchPhotosResponse.self) { (response, error) in
+            guard let response = response else {
+                completion(nil, error)
+                return
+            }
+            completion(response.photos.pages, nil)
         }
     }
     
