@@ -102,6 +102,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="eJY-Ej-bar" id="j10-HE-qdr"/>
+                                    <outlet property="delegate" destination="eJY-Ej-bar" id="7ub-2c-aJR"/>
+                                </connections>
                             </collectionView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yXI-ez-5Xa">
                                 <rect key="frame" x="0.0" y="295" width="414" height="517"/>

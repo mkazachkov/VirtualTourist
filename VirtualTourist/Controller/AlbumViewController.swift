@@ -26,8 +26,6 @@ class AlbumViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = self
-        collectionView.delegate = self
         photos = pin.photos?.allObjects as! [Photo]
         
         let annotation = MKPointAnnotation()
